@@ -39,6 +39,13 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4.6.2
         with: 
-          name: eslint code quality tests
+          name: eslint-code-quality-artifact
           path: results.xml
-          
+      - name: run dependency scanning
+        run: npm audit --audit-level=high --json > npm-audit-report.json
+      - name: public dependency scanning tests
+        if: always()
+        uses: actions/upload-artifact@v4.6.2
+        with: 
+          name: dependencies-scanning-artifact
+          path: npm-audit-report.json.xml
