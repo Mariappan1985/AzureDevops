@@ -31,21 +31,25 @@ jobs:
         with: 
           name: test-results-artifact
           path: test-results/results.xml
+      
       - name: run code quality using eslint
         run: |
           set -o pipefail
           npx eslint . --ext .js --exit-on-fatal-error -f stylish | tee lint-report.txt
+     
       - name: public eslint code quality tests
         if: always()
         uses: actions/upload-artifact@v4.6.2
         with: 
           name: eslint-code-quality-artifact
           path: results.xml
+     
       - name: run dependency scanning
         run: npm audit --audit-level=high --json > npm-audit-report.json
+      
       - name: public dependency scanning tests
         if: always()
         uses: actions/upload-artifact@v4.6.2
         with: 
           name: dependencies-scanning-artifact
-          path: npm-audit-report.json.xml
+          path: npm-audit-report.json
