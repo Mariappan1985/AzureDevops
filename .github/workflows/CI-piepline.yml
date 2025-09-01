@@ -77,3 +77,15 @@ jobs:
         run: | 
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/my-node-app:dev-latest
           docker push ${{ secrets.DOCKER_HUB_USERNAME }}/my-node-app:dev-${{ github.sha }}
+
+
+deploy:
+  needs: build_test
+  runs-on: ubuntu-latest
+
+  steps: 
+    - name: deply to render
+      run: |
+        curl -X POST "https://api.render.com/v1/services/srv-d2qop2n5r7bs73b17ol0/deploys" \
+        -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+        -H "Accept: application/json"
