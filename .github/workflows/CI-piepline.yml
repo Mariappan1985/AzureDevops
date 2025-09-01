@@ -59,7 +59,7 @@ jobs:
       - name: Install Trivy
         run: |
           curl -sfL
-          - name: Install Trivy
+      - name: Install Trivy
 
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh
