@@ -58,10 +58,6 @@ jobs:
 
       - name: Install Trivy
         run: |
-          curl -sfL
-      - name: Install Trivy
-
-        run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh
           sudo mv ./bin/trivy /usr/local/bin/
           trivy --version
@@ -70,5 +66,4 @@ jobs:
 
       - name: run test inside docker
         run: docker run --rm my-node-app npm test
- 
-        
+
